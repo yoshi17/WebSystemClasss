@@ -25,7 +25,12 @@ ArrayList<String> msgList = (ArrayList<String>)session.getAttribute("msgList");
 		<button type="submit" name="action" value="ダウンロード">ダウンロード</button>
 	</form>
 	<hr>
-
+	<h2>追加機能について</h2>
+	<ul>
+		<li>リセットボタンの追加(セッションを破棄し、新規セッションの開始)</li>
+		<li>ダウンロードボタンの追加(.txtで保存可)</li>
+	</ul>
+	<hr>
 	<% if (msgList != null) { %>
 		<ul class="msg-group">
 		<%for(String msg : msgList) {%>
