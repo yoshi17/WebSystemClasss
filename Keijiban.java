@@ -61,7 +61,9 @@ public class Keijiban extends HttpServlet {
 
 		String msg = request.getParameter("msg");
 		if(msg == "") {
-			msg = "ここに本文を記入してください";
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/keijiban.jsp");
+    		dispatcher.forward(request, response);
+        	return;
 		}
 
 		ArrayList<String> msgList = (ArrayList<String>) session.getAttribute("msgList");
@@ -103,9 +105,9 @@ public class Keijiban extends HttpServlet {
 					  filewriter.write(msg + "\n");
 				  }
 
-				  filewriter.close();
+				  	filewriter.close();
 				}catch(IOException e){
-				  System.out.println(e);
+					System.out.println(e);
 				}
 
 			if (!file.exists() || !file.isFile()) {
