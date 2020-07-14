@@ -28,7 +28,7 @@ ArrayList<String> msgList = (ArrayList<String>)session.getAttribute("msgList");
 	<h2>追加機能について</h2>
 	<ul>
 		<li>リセットボタンの追加(セッションを破棄し、新規セッションの開始)</li>
-		<li>ダウンロードボタンの追加(.txtで保存可)</li>
+		<li>ダウンロードボタンの追加(投稿内容をtxtで保存可/投稿されていない場合は機能しない)</li>
 	</ul>
 	<hr>
 	<% if (msgList != null) { %>
