@@ -53,8 +53,6 @@ public class Keijiban extends HttpServlet {
 		}
 	}
 
-	ArrayList<String> mesgList = new ArrayList<String>();
-
 	void submit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
@@ -74,8 +72,6 @@ public class Keijiban extends HttpServlet {
 
 		msgList.add(0, msg);
 
-		mesgList = msgList;
-
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/keijiban.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -84,6 +80,13 @@ public class Keijiban extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+
+		ArrayList<String> msgList = (ArrayList<String>) session.getAttribute("msgList");
+        if(Objects.isNull(msgList)) {
+        	RequestDispatcher dispatcher = request.getRequestDispatcher("/keijiban.jsp");
+    		dispatcher.forward(request, response);
+        	return;
+        }
 
 		FileInputStream fis = null;
 		InputStreamReader isr = null;
@@ -96,8 +99,8 @@ public class Keijiban extends HttpServlet {
 			try{
 				  FileWriter filewriter = new FileWriter(file);
 
-				  for(String mesg : mesgList) {
-					  filewriter.write(mesg + "\n");
+				  for(String msg : msgList) {
+					  filewriter.write(msg + "\n");
 				  }
 
 				  filewriter.close();
@@ -142,6 +145,7 @@ public class Keijiban extends HttpServlet {
 			} catch (IOException e) {
 			}
 		}
+
 	}
 
 	void terminateSession(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
